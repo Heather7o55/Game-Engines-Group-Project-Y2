@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : Entity
 {
-    public float playerSpeed = 10f;
+    public float Speed = 6f;
+    public float SprintSpeed = 10f;
     public float jumpHeight = 4f;
     private bool jumpCooldown = false;
 
@@ -25,7 +26,7 @@ public class PlayerController : Entity
             StartCoroutine(JumpCooldown());
         }
 
-        selfRigidBody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal") *playerSpeed, selfRigidBody.linearVelocity.y);
+        selfRigidBody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal") *Speed, selfRigidBody.linearVelocity.y);
     }
     IEnumerator JumpCooldown()
     {
