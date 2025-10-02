@@ -4,10 +4,25 @@ using UnityEngine;
 public class PlayerController : Entity
 {
     public float playerSpeed = 200f;
+    public float jumpHeight = 200f;
+    private bool jumpCooldown = false;
 
     private void UpdateMovement()
     {
-        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"),new int = (Input.getbutton)  );
+        if (Input.GetKey(KeyCode.Space) & !jumpCooldown)
+        {
+            selfRigidBody.AddForce(new Vector2(0, jumpHeight));
+            jumpCooldown = true;
+            StartCoroutine(JumpCooldown());
+        }
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         moveDirection.Normalize();
+        selfRigidBody.velocity = moveDirection * moveSpeed;
     }
+    IEnumerator JumpCooldown()
+    {
+        yield return new WaitForSeconds(2);
+    }
+    public override void OnTakeDamage();
+    public override void OnDie();
 }
