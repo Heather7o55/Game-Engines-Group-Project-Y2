@@ -3,25 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : Entity
 {
-    public float playerSpeed = 200f;
-    public float jumpHeight = 200f;
+    public float playerSpeed = 10f;
+    public float jumpHeight = 4f;
     private bool jumpCooldown = false;
 
+    void Start()
+    {
+        Setup();
+    }
+    void Update()
+    {
+        UpdateMovement();
+    }
     private void UpdateMovement()
     {
-        if (Input.GetKey(KeyCode.Space) & !jumpCooldown)
+
+        if(Input.GetKey(KeyCode.Space) & !jumpCooldown)
         {
-            selfRigidBody.AddForce(new Vector2(0, jumpHeight));
+            selfRigidBody.linearVelocity = new Vector2(selfRigidBody.linearVelocity.x,jumpHeight);
             jumpCooldown = true;
             StartCoroutine(JumpCooldown());
         }
-        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
-        moveDirection.Normalize();
-        selfRigidBody.linearVelocity = moveDirection * playerSpeed;
+
+        selfRigidBody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal") *playerSpeed, selfRigidBody.linearVelocity.y);
     }
     IEnumerator JumpCooldown()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
+        jumpCooldown = false;
     }
     public override void OnTakeDamage()
     {
