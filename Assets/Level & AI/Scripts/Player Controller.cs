@@ -15,14 +15,20 @@ public class PlayerController : Entity
             jumpCooldown = true;
             StartCoroutine(JumpCooldown());
         }
-        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
         moveDirection.Normalize();
-        selfRigidBody.velocity = moveDirection * moveSpeed;
+        selfRigidBody.linearVelocity = moveDirection * playerSpeed;
     }
     IEnumerator JumpCooldown()
     {
         yield return new WaitForSeconds(2);
     }
-    public override void OnTakeDamage();
-    public override void OnDie();
+    public override void OnTakeDamage()
+    {
+
+    }
+    public override void OnDie()
+    {
+
+    }
 }
