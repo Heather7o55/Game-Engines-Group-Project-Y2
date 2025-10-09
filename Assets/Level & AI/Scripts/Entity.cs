@@ -18,11 +18,10 @@ public abstract class Entity : MonoBehaviour
     // ModifyHeath allows you to increase or decrease heath in one function by sending a positive or negative value
     public void ModifyHealth(int modifier)
     {
-        if(modifier < 0) OnTakeDamage();
         currentHealth += modifier;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-        if(currentHealth <= 0) Die();
+        if (modifier < 0) OnTakeDamage();
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        if (currentHealth <= 0) Die();
     }
     // ModifyMaxHeath allows you to increase or decrease "maxhealth" in one function by sending a positive or negative value
     public void ModifyMaxHealth(int modifier)

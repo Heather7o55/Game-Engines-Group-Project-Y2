@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerController : Entity
+public class Player : Entity
 {
+    public bool hidden = false;
     public float Speed = 6f;
     public float SprintSpeed = 10f;
     public float jumpHeight = 4f;
@@ -32,6 +33,10 @@ public class PlayerController : Entity
     {
         yield return new WaitForSeconds(1f);
         jumpCooldown = false;
+    }
+    private void Hide()
+    {
+        gameObject.GetComponent<Collider2D>().enabled = false;
     }
     public override void OnTakeDamage()
     {
