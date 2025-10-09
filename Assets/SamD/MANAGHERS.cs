@@ -15,6 +15,20 @@ public class MANAGHERS : MonoBehaviour
     int c = 0;
     bool W = false;
     bool L = false;
+    public GameObject SetActive;
+    public GameObject SetActive1;
+    public GameObject SetActive2;
+    public GameObject SetActive3;
+    public GameObject SetActive4;
+    public GameObject SetActive5;
+    public GameObject SetActive6;
+    public GameObject SetActive7;
+    public GameObject SetActive8;
+
+    public GameObject WIN_SA9;
+
+    public int Lcount = 0;
+    bool LossReal = false;
 
     public void one()
     {
@@ -27,6 +41,15 @@ public class MANAGHERS : MonoBehaviour
         {
             L = true;
         }
+        SetActive.SetActive(false);
+        SetActive1.SetActive(false);
+        SetActive2.SetActive(false);
+        SetActive3.SetActive(false);
+        SetActive4.SetActive(false);
+        SetActive5.SetActive(false);
+        SetActive6.SetActive(false);
+        SetActive7.SetActive(false);
+        SetActive8.SetActive(false);
     }
     public void two()
     {
@@ -131,10 +154,28 @@ public class MANAGHERS : MonoBehaviour
         if(L == true)
         {
             Debug.Log("Loss");
+            SetActive.SetActive(true);
+            SetActive1.SetActive(true);
+            SetActive2.SetActive(true);
+            SetActive3.SetActive(true);
+            SetActive4.SetActive(true);
+            SetActive5.SetActive(true);
+            SetActive6.SetActive(true);
+            SetActive7.SetActive(true);
+            SetActive8.SetActive(true);
+            Lcount = Lcount+1;
+            L = false;
+        }
+        if(Lcount>=5)
+        {
+            LossReal = true;
+            Time.timeScale = 0.0f;
         }
         if(W == true)
         {
             Debug.Log("Won");
+            // attatch movement
+            WIN_SA9.SetActive(true);
         }
     }
 }
